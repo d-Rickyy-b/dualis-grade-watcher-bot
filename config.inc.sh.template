@@ -1,7 +1,13 @@
 
-user=
-pw=
+# credentials for the dualis web page
+user='DUALIS USERNAME'
+pw='DUALIS PW'
 
+# recipients for the full diff (space-separated)
 mailto=
+
+# recipients for the grade-redacted diff (space-separated)
 mailto_nogrades=
+
+# mail sender
 mailfrom=
