@@ -16,7 +16,7 @@ export LC_MESSAGES="en_US.UTF-8"
 export LC_NAME="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-python3.6 listgrades.pyz "$user" "$pw" > grades.tsv.tmp
+python3.6 ./dualis.py "$user" "$pw" > grades.tsv.tmp
 cat grades.tsv.tmp | sort | uniq > grades.tsv.new
 rm -f grades.tsv.tmp
 
