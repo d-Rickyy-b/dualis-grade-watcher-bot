@@ -64,7 +64,8 @@ def main() -> None:
                     exam = gradecells[1].text_content
                     grade = gradecells[3].text_content
 
-                    print("{module}\t{header1}\t{header2}\t{exam}\t{grade}\n".format(**locals()))
+                    if grade != "noch nicht gesetzt":
+                        print("{module}\t{header1}\t{header2}\t{exam}\t{grade}\n".format(**locals()))
 
 if __name__ == '__main__':
     main()
