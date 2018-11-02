@@ -4,7 +4,7 @@ set -eu
 cd "$(dirname "$0")"
 
 ### CONFIG
-. ./config.inc.sh
+source ./config.inc.sh
 
 ### ACTUAL CODE
 
