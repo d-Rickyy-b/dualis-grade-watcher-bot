@@ -63,7 +63,17 @@ if ! diff -N grades.tsv grades.tsv.new >/dev/null 2>&1; then
             diff -b -U0 -N grades.tsv grades.tsv.new | awk -F'\t' 'BEGIN { OFS=FS } $5 != "" && $5 != "noch nicht gesetzt" { $5="<NOTE VERSTECKT>";} { print; }'
         ) | /usr/sbin/sendmail -oi -t
     done
-    #diff -uN grades.tsv grades.tsv.new || true
+
+    # If you want to getnotified via Telegram, just create a bod and add the token here
+    # telegramToken=""
+    # chat_id=""
+
+    # Send message without grade content
+    # curl -X POST "https://api.telegram.org/bot$telegramToken/sendMessage" -d chat_id="$chat_id" -d "text=Neue Noten sind online!"
+
+    # Send message with grades
+    # curl -X POST "https://api.telegram.org/bot$telegramToken/sendMessage" -d chat_id="$chat_id" -d "text=$(printf "Neue Noten sind online! \n%s" "$gradesMsg")"
+
     mv -f grades.tsv.new  grades.tsv
 else
     rm grades.tsv.new
