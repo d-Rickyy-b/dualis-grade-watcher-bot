@@ -22,6 +22,25 @@ rm -f grades.tsv.tmp
 
 if ! diff -N grades.tsv grades.tsv.new >/dev/null 2>&1; then
     # grade files differ
+    count=$(cat grades.tsv | wc -l)
+    countNew=$(cat grades.tsv.new | wc -l)
+
+    # Exit if the amount of grades = 0
+    if [[ $countNew -eq 0 ]]; then
+        exit 1
+    fi
+
+    # Exit if there are less grades than before. It's a common Dualis error
+    if [[ $countNew -lt $count ]]; then
+        echo -e "Count new is smaller than old count: $countNew | $count"
+        echo -e "grades.tsv: $(cat grades.tsv)"
+        echo -e "grades.tsv.new: $(cat grades.tsv.new)"
+        exit 1
+    fi
+
+    grades="$(diff -b -U0 -N grades.tsv grades.tsv.new)"
+    gradesMsg=$(printf "%s" "$grades" | sed -e '1,3d' | awk -F "\t" '{$2=$3="";print $0}')
+
     for to in $mailto; do
         (
             printf 'To: %s\n' "$to"
